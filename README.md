@@ -1,6 +1,6 @@
 # zeitgeist
 
-A new Flutter application.
+This is the official github repository for the mobile application for Zeitgeist 2019, the annual cultural festival of IIT Ropar
 
 ## Getting Started
 
