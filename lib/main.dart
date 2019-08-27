@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import './FirstPage.dart' as first;
-import './SecondPage.dart' as second;
-import './ThirdPage.dart' as third;
 import './MyTabs.dart' as mytabs;
 import 'dart:async';
 
@@ -9,42 +6,23 @@ import 'dart:async';
 void main() {
   runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen()
+      home: HomePage()
   ));
 }
 
-class SplashScreen extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  _HomePageState createState() => _HomePageState();
 
 }
 
-class _SplashScreenState extends State<SplashScreen> {
-
-  void initState(){
-    super.initState();
-    Future.delayed(
-        Duration(seconds: 3),
-        (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>mytabs.MyTabs()));
-        });
-  }
+class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       body: FlightImageAsset()
+       body: mytabs.MyTabs()
     );
-  }
-}
-
-class FlightImageAsset extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    AssetImage assetImage = AssetImage('Images/festposter.jpg');
-    Image image = Image(image: assetImage);
-    return Container(child:image);
   }
 
 }
