@@ -1,4 +1,4 @@
-package com.abhinavkhanna.zeitgeist;
+package com.softcom.zeitgeist;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
