@@ -1,31 +1,25 @@
 import 'package:flutter/material.dart';
-import './main.dart';
 import 'dart:async';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:zeitgeist/StarNight.dart' as StarNight;
 import 'package:zeitgeist/Detail.dart' as Detail;
 import 'package:zeitgeist/SampleEvent.dart' as Sample;
 
 class MyApp extends StatefulWidget {
-  int page;
-  MyApp(int p){
-    page = p;
-  }
+  final data;
+  final int page;
+  MyApp(this.page, this.data);
 
   @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return MyAppState(page);
-  }
+  State<StatefulWidget> createState() => MyAppState(page,data);
 }
 
 class MyAppState extends State<MyApp> {
-
+  var data;
   int _selectedPage = 0,page;
   var _pageOptions;
 
-  MyAppState(int p){
+  MyAppState(int p, dt){
+    data = dt;
     page = p;
     if(page==1)
     {
@@ -64,37 +58,37 @@ class MyAppState extends State<MyApp> {
         //theme: ThemeData(primarySwatch: Colors.blue),
           backgroundColor: Colors.white,
           body: _pageOptions[_selectedPage],
-          bottomNavigationBar: Theme(
-            data: Theme.of(context).copyWith(
-              // sets the background color of the `BottomNavigationBar`
-                canvasColor: Color.fromRGBO(139,0,0,1),
-                // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-                primaryColor: Colors.white,
-                textTheme: Theme
-                    .of(context)
-                    .textTheme
-                    .copyWith(caption: new TextStyle(color: Colors.white))),
-            child:BottomNavigationBar(
-                currentIndex: _selectedPage,
-                onTap: (int index) {
-                  setState(() {
-                    _selectedPage = index;
-                  });
-                },
-                items: [
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.event), title: Text('Schedule'),backgroundColor: Color.fromRGBO(166, 16, 30, 1)),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.star), title: Text('Pro-Nights'),backgroundColor: Color.fromRGBO(166, 16, 30, 1)),
-                ]),
-          )
+          // bottomNavigationBar: Theme(
+          //   data: Theme.of(context).copyWith(
+          //     // sets the background color of the `BottomNavigationBar`
+          //       canvasColor: Colors.black,
+          //       // sets the active color of the `BottomNavigationBar` if `Brightness` is light
+          //       primaryColor: Colors.white,
+          //       textTheme: Theme
+          //           .of(context)
+          //           .textTheme
+          //           .copyWith(caption: new TextStyle(color: Colors.white))),
+          //   child:BottomNavigationBar(
+          //       currentIndex: _selectedPage,
+          //       onTap: (int index) {
+          //         setState(() {
+          //           _selectedPage = index;
+          //         });
+          //       },
+          //       items: [
+          //         BottomNavigationBarItem(
+          //             icon: Icon(Icons.event), title: Text('Schedule'),backgroundColor: Color.fromRGBO(166, 16, 30, 1)),
+          //         BottomNavigationBarItem(
+          //             icon: Icon(Icons.star), title: Text('Pro-Nights'),backgroundColor: Color.fromRGBO(166, 16, 30, 1)),
+          //       ]),
+          // )
 
         );
   }
 
   Future<List<Sample.SampleEvent>> _getEventday1() async{
-    var data = await http.get("http://www.zeitgeist.org.in/data-api/events/");
-    var jsonData = json.decode(data.body);
+    var jsonData = data;
+    print(data);
 
     List<Sample.SampleEvent> sampleEvents=[];
     for(var u in jsonData){
@@ -118,8 +112,7 @@ class MyAppState extends State<MyApp> {
   }
 
   Future<List<Sample.SampleEvent>> _getEventday2() async{
-    var data = await http.get("http://www.zeitgeist.org.in/data-api/events/");
-    var jsonData = json.decode(data.body);
+    var jsonData = data;
 
     List<Sample.SampleEvent> sampleEvents=[];
 
@@ -143,8 +136,7 @@ class MyAppState extends State<MyApp> {
   }
 
   Future<List<Sample.SampleEvent>> _getEventday3() async{
-    var data = await http.get("http://www.zeitgeist.org.in/data-api/events/");
-    var jsonData = json.decode(data.body);
+    var jsonData = data;
 
     List<Sample.SampleEvent> sampleEvents=[];
     for(var u in jsonData){
@@ -180,6 +172,7 @@ class MyAppState extends State<MyApp> {
     return listView;*/
 
     return Container(
+      color: Colors.black87,
         child: FutureBuilder(
           future: _getEventday1(),
           builder: (BuildContext context,AsyncSnapshot snapshot){
@@ -312,7 +305,7 @@ class MyAppState extends State<MyApp> {
     return listTile;*/
 
   var listTile = Card(
-      color:Color.fromRGBO(255,118,25, 0.88),
+    color: Colors.orange[300],
      child: ExpansionTile(
          title: Container(
            padding: EdgeInsets.all(0),
