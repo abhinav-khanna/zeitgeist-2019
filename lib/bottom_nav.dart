@@ -322,10 +322,7 @@ class MyAppState extends State<MyApp> {
                    color: Colors.white,
                    fontWeight: FontWeight.bold
                ),),
-             onTap: (){
-               Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context)
-               =>Detail.Info(Sample.SampleEvent(sampleEvent.name,sampleEvent.start_date_time,sampleEvent.description))));
-             },
+             onTap: (){},
              /*trailing: Text(time,
                style: TextStyle(
                    color: Colors.black
