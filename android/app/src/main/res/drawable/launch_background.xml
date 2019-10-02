@@ -7,7 +7,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/festposter" 
+            android:src="@drawable/back" 
             android:dither="true"/>
     </item>
 </layer-list>
