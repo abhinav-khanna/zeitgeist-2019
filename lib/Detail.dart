@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import './SampleEvent.dart' as Sample;
 import 'package:date_format/date_format.dart';
 
 class Info extends StatelessWidget {
-  Sample.SampleEvent sampleEvent;
-  Info(this.sampleEvent);
+  final data;
+  final Sample.SampleEvent sampleEvent;
+  Info(this.sampleEvent, this.data);
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Detail(sampleEvent);
+    return Detail(sampleEvent, data);
   }
 }
 
 class Detail extends StatefulWidget {
-  Sample.SampleEvent sampleEvent;
-  Detail(this.sampleEvent);
+  final Sample.SampleEvent sampleEvent;
+  final data;
+  Detail(this.sampleEvent, this.data);
 
   @override
   _DetailState createState() => _DetailState(sampleEvent);
@@ -50,8 +50,7 @@ class _DetailState extends State<Detail> {
   }
 
   Future<Sample.Event> GetEventDetails(Sample.SampleEvent sampleEvent) async {
-    var data = await http.get("http://www.zeitgeist.org.in/data-api/events/");
-    var jsonData = json.decode(data.body);
+    var jsonData = widget.data;
 
     Sample.Event event;
     for (var u in jsonData) {
@@ -116,7 +115,7 @@ class _DetailState extends State<Detail> {
               ],
             ),
             Text(
-              "Type:" + event.event_type,
+              "Type: " + event.event_type,
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -126,7 +125,7 @@ class _DetailState extends State<Detail> {
             ),
             (event.maximum_team_size == 1)
                 ? (Text(
-                    "Group Size:1",
+                    "Group Size: 1",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -135,7 +134,7 @@ class _DetailState extends State<Detail> {
                     textAlign: TextAlign.center,
                   ))
                 : Text(
-                    "Group Size:" +
+                    "Group Size: " +
                         event.minimum_team_size.toString() +
                         "-" +
                         event.maximum_team_size.toString(),
@@ -150,7 +149,7 @@ class _DetailState extends State<Detail> {
               "Prize Details",
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 15,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
@@ -163,7 +162,7 @@ class _DetailState extends State<Detail> {
                   Container(
                     alignment: Alignment.center,
                     child: Text(
-                      "First:",
+                      "First: ",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 15,
@@ -175,9 +174,8 @@ class _DetailState extends State<Detail> {
                   Container(
                       alignment: Alignment.center,
                       child: Text(
-                        event.first_cash_prize.toString() +
-                            "+" +
-                            event.first_goodies.toString()+"(Prize + Goodies)",
+                        (event.first_cash_prize+
+                            event.first_goodies).toString(),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -192,7 +190,7 @@ class _DetailState extends State<Detail> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "Second:",
+                  "Second: ",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 15,
@@ -201,9 +199,7 @@ class _DetailState extends State<Detail> {
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  event.second_cash_prize.toString() +
-                      "+" +
-                      event.second_goodies.toString()+"(Prize + Goodies)",
+                  (event.second_cash_prize+event.second_goodies).toString(),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 15,
@@ -217,7 +213,7 @@ class _DetailState extends State<Detail> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "Third:",
+                  "Third: ",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 15,
@@ -226,9 +222,8 @@ class _DetailState extends State<Detail> {
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  event.third_cash_prize.toString() +
-                      "+" +
-                      event.third_goodies.toString()+"(Prize + Goodies)",
+                  (event.third_cash_prize+
+                      event.third_goodies).toString(),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 15,

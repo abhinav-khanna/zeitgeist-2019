@@ -198,8 +198,12 @@ class _HomePageState extends State<HomePage> {
     });
     try {
       var jsonData = json.decode(data.body);
+      jsonData.sort((a,b){
+        return a['start_date_time'].toString().compareTo(b['start_date_time'].toString());
+      });
       return jsonData;
     } catch (err) {
+      print(err);
       return 'retry';
     }
   }
