@@ -342,52 +342,58 @@ class MyAppState extends State<MyApp> {
 
 
 
-class FlightImageAsset extends StatelessWidget{
+// ignore: must_be_immutable
+class FlightImageAsset extends StatefulWidget{
   String name;
 
   FlightImageAsset(this.name);
 
   @override
+  _FlightImageAssetState createState() => _FlightImageAssetState();
+}
+
+class _FlightImageAssetState extends State<FlightImageAsset> {
+  @override
   Widget build(BuildContext context) {
     // TODO: implement build
     AssetImage assetImage;
 
-    if(name=='Calypso' || name=='Tarang' || name=='Waltz' || name=='Junoon' || name=='Smack That' || name=='Groove-Z' || name=='Western Dance'
-        || name=='Street Battle' || name=='Tarang (Folk Dance)')
+    if(widget.name=='Calypso' || widget.name=='Tarang' || widget.name=='Waltz' || widget.name=='Junoon' || widget.name=='Smack That' || widget.name=='Groove-Z' || widget.name=='Western Dance'
+        || widget.name=='Street Battle' || widget.name=='Tarang (Folk Dance)')
       {
         assetImage = AssetImage('Images/dance.jpg');
       }
-    else if(name=='Torque' || name=='Saaz' || name=='Adagio' || name=='Harmony' || name=='Rap-iD' || name=='Capriccio')
+    else if(widget.name=='Torque' || widget.name=='Saaz' || widget.name=='Adagio' || widget.name=='Harmony' || widget.name=='Rap-iD' || widget.name=='Capriccio')
       {
         assetImage = AssetImage('Images/music.png');
       }
-    else if(name=='MELA Quiz' || name=='General Quiz' || name=='Brainwaves' || name=='Puzzling Quiz' || name=='India Quiz' || name=='Mela Quiz')
+    else if(widget.name=='MELA Quiz' || widget.name=='General Quiz' || widget.name=='Brainwaves' || widget.name=='Puzzling Quiz' || widget.name=='India Quiz' || widget.name=='Mela Quiz')
       {
         assetImage = AssetImage('Images/quiz.png');
       }
-    else if(name=='Fotopedia' || name=='Pixelerator')
+    else if(widget.name=='Fotopedia' || widget.name=='Pixelerator')
       {
         assetImage = AssetImage('Images/camera.jpg');
       }
-    else if(name=='CS-GO' || name=='FIFA' || name=='PUBG' || name=='Fifa')
+    else if(widget.name=='CS-GO' || widget.name=='FIFA' || widget.name=='PUBG' || widget.name=='Fifa')
       {
         assetImage = AssetImage('Images/gaming.png');
       }
-    else if(name=='Parley' || name=='Melodum' || name=='Spell Bee' || name=='GD' || name=='Extempore' || name=='Turncoat')
+    else if(widget.name=='Parley' || widget.name=='Melodum' || widget.name=='Spell Bee' || widget.name=='GD' || widget.name=='Extempore' || widget.name=='Turncoat')
       {
         assetImage = AssetImage('Images/debate.png');
       }
-    else if(name=='Wall Graffiti' || name=='On The Spot' || name=='Face Painting' || name=='Rangoli' || name=='Doodle 4 Zeitgeist'
-        || name=='Poster Designing' || name=='Shoe Designing' || name=='Live sketching' || name=='Poster Making')
+    else if(widget.name=='Wall Graffiti' || widget.name=='On The Spot' || widget.name=='Face Painting' || widget.name=='Rangoli' || widget.name=='Doodle 4 Zeitgeist'
+        || widget.name=='Poster Designing' || widget.name=='Shoe Designing' || widget.name=='Live sketching' || widget.name=='Poster Making')
       {
         assetImage = AssetImage('Images/paint.jpg');
       }
 
-    else if(name=="Director's Cut" || name=='Ad-Mad' || name=='Dubsmash')
+    else if(widget.name=="Director's Cut" || widget.name=='Ad-Mad' || widget.name=='Dubsmash')
       {
         assetImage = AssetImage('Images/videomaking.jpg');
       }
-    else if(name=='Nukkad Natak' || name=='Yatharth' || name=='Chaplin' || name=='Abhivyakti' || name=='Improv')
+    else if(widget.name=='Nukkad Natak' || widget.name=='Yatharth' || widget.name=='Chaplin' || widget.name=='Abhivyakti' || widget.name=='Improv')
       {
         assetImage = AssetImage('Images/dramatics.png');
       }
@@ -403,15 +409,7 @@ class FlightImageAsset extends StatelessWidget{
       ),
     );
 
-    Image image = Image(image: assetImage,
-        width: 80,
-        height: 80,
-        color: null,
-        fit: BoxFit.scaleDown,
-        alignment: Alignment.center);
-    return Container(child:image);
   }
-
 }
 
 
