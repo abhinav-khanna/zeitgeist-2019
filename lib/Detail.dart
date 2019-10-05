@@ -1,29 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import './SampleEvent.dart' as Sample;
 import 'package:date_format/date_format.dart';
 
-class Info extends StatelessWidget {
+class Info extends StatefulWidget {
   final data;
   final Sample.SampleEvent sampleEvent;
   Info(this.sampleEvent, this.data);
 
   @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Detail(sampleEvent, data);
-  }
-}
-
-class Detail extends StatefulWidget {
-  final Sample.SampleEvent sampleEvent;
-  final data;
-  Detail(this.sampleEvent, this.data);
-
-  @override
   _DetailState createState() => _DetailState(sampleEvent);
 }
 
-class _DetailState extends State<Detail> {
+class _DetailState extends State<Info> {
   Sample.SampleEvent sampleEvent;
   _DetailState(this.sampleEvent);
 
@@ -78,7 +67,8 @@ class _DetailState extends State<Detail> {
             u['second_goodies'],
             u['third_goodies'],
             u['minimum_team_size'],
-            u['maximum_team_size']);
+            u['maximum_team_size'],
+            u['link_to_rulebook']);
         print('event finalized');
         break;
       }
@@ -106,7 +96,8 @@ class _DetailState extends State<Detail> {
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
-                Text(starttime,
+                Text(
+                  starttime,
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -174,8 +165,8 @@ class _DetailState extends State<Detail> {
                   Container(
                       alignment: Alignment.center,
                       child: Text(
-                        (event.first_cash_prize+
-                            event.first_goodies).toString(),
+                        (event.first_cash_prize + event.first_goodies)
+                            .toString(),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -199,7 +190,7 @@ class _DetailState extends State<Detail> {
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  (event.second_cash_prize+event.second_goodies).toString(),
+                  (event.second_cash_prize + event.second_goodies).toString(),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 15,
@@ -222,8 +213,7 @@ class _DetailState extends State<Detail> {
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  (event.third_cash_prize+
-                      event.third_goodies).toString(),
+                  (event.third_cash_prize + event.third_goodies).toString(),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 15,
@@ -231,6 +221,37 @@ class _DetailState extends State<Detail> {
                   ),
                   textAlign: TextAlign.center,
                 )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                RaisedButton(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0)),
+                  child: Text(
+                    'Register',
+                    style: TextStyle(color: Colors.green),
+                  ),
+                  onPressed: () {
+                    launch('https://zeitgeist.org.in/register/' +
+                        event.id.toString());
+                  },
+                ),
+                RaisedButton(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0)),
+                  child: Text(
+                    'Rule Book',
+                    style: TextStyle(color: Colors.green),
+                  ),
+                  onPressed: () {
+                    launch(
+                        event.link_to_rulebook);
+                  },
+                ),
               ],
             )
           ],

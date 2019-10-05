@@ -7,7 +7,6 @@ class CoreTeam extends StatelessWidget{
   CoreTeam(this.title);
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
         appBar: AppBar(
             title:Text("Zeitgeist 2019 core team")
@@ -117,8 +116,6 @@ class CoreTeam extends StatelessWidget{
                   title: Text("Mayank Raj"),
                   subtitle: Text("Decoration Head"),
                 ),
-                
-
               ],
             );
           },

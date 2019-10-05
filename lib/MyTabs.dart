@@ -9,7 +9,7 @@ class MyTabs extends StatefulWidget {
   MyTabsState createState() => MyTabsState();
 }
 
-class MyTabsState extends State<MyTabs> with TickerProviderStateMixin {
+class MyTabsState extends State<MyTabs> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin<MyTabs> {
   TabController controller;
 
   @override
@@ -51,4 +51,8 @@ class MyTabsState extends State<MyTabs> with TickerProviderStateMixin {
       ]),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

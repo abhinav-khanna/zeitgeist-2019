@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:zeitgeist/StarNight.dart' as StarNight;
 import 'package:zeitgeist/Detail.dart' as Detail;
 import 'package:zeitgeist/SampleEvent.dart' as Sample;
 import 'package:date_format/date_format.dart';
@@ -16,32 +14,18 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   var data;
-  int _selectedPage = 0, page;
+  int page;
   var _pageOptions;
 
   MyAppState(int p, dt) {
     data = dt;
     page = p;
     if (page == 1) {
-      _pageOptions = [
-        getListViewDay1(),
-        StarNight.StarNight(),
-
-        //Text('Day 1 Competions',textAlign: TextAlign.center,),
-        //Text('Day 1 Pro nights',textAlign: TextAlign.center,)
-      ];
+      _pageOptions = getListViewDay('2019-10-11');
     } else if (page == 2) {
-      _pageOptions = [
-        getListViewDay2(),
-        StarNight.StarNight(),
-        //getListTile('event_name', 'event_category', 'time'),
-      ];
+      _pageOptions = getListViewDay('2019-10-12');
     } else if (page == 3) {
-      _pageOptions = [
-        getListViewDay3(),
-        StarNight.StarNight(),
-        //getListTile('event_name', 'event_category', 'time'),
-      ];
+      _pageOptions = getListViewDay('2019-10-13');
     }
   }
 
@@ -52,81 +36,11 @@ class MyAppState extends State<MyApp> {
       //debugShowCheckedModeBanner: false,
       //theme: ThemeData(primarySwatch: Colors.blue),
       backgroundColor: Colors.white,
-      body: _pageOptions[_selectedPage],
-      // bottomNavigationBar: Theme(
-      //   data: Theme.of(context).copyWith(
-      //     // sets the background color of the `BottomNavigationBar`
-      //       canvasColor: Colors.black,
-      //       // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-      //       primaryColor: Colors.white,
-      //       textTheme: Theme
-      //           .of(context)
-      //           .textTheme
-      //           .copyWith(caption: new TextStyle(color: Colors.white))),
-      //   child:BottomNavigationBar(
-      //       currentIndex: _selectedPage,
-      //       onTap: (int index) {
-      //         setState(() {
-      //           _selectedPage = index;
-      //         });
-      //       },
-      //       items: [
-      //         BottomNavigationBarItem(
-      //             icon: Icon(Icons.event), title: Text('Schedule'),backgroundColor: Color.fromRGBO(166, 16, 30, 1)),
-      //         BottomNavigationBarItem(
-      //             icon: Icon(Icons.star), title: Text('Pro-Nights'),backgroundColor: Color.fromRGBO(166, 16, 30, 1)),
-      //       ]),
-      // )
+      body: _pageOptions,
     );
   }
 
-  Future<List<Sample.SampleEvent>> _getEventday1() async {
-    var jsonData = data;
-    print(data);
-
-    List<Sample.SampleEvent> sampleEvents = [];
-    for (var u in jsonData) {
-      Sample.SampleEvent sampleEvent =
-          Sample.SampleEvent(u['name'], u['start_date_time'], u['description']);
-      String s = "";
-      for (var i = 0; i < 10; i++) {
-        s += sampleEvent.start_date_time[i];
-      }
-
-      if (s == '2019-10-11') {
-        sampleEvents.add(sampleEvent);
-      }
-      //events.add(event);
-    }
-
-    print(sampleEvents.length);
-    return sampleEvents;
-  }
-
-  Future<List<Sample.SampleEvent>> _getEventday2() async {
-    var jsonData = data;
-
-    List<Sample.SampleEvent> sampleEvents = [];
-
-    for (var u in jsonData) {
-      Sample.SampleEvent sampleEvent =
-          Sample.SampleEvent(u['name'], u['start_date_time'], u['description']);
-      String s = "";
-      for (var i = 0; i < 10; i++) {
-        s += sampleEvent.start_date_time[i];
-      }
-
-      if (s == '2019-10-12') {
-        sampleEvents.add(sampleEvent);
-      }
-      //events.add(event);
-    }
-
-    print(sampleEvents.length);
-    return sampleEvents;
-  }
-
-  Future<List<Sample.SampleEvent>> _getEventday3() async {
+  _getEventday(day) {
     var jsonData = data;
 
     List<Sample.SampleEvent> sampleEvents = [];
@@ -138,95 +52,24 @@ class MyAppState extends State<MyApp> {
         s += sampleEvent.start_date_time[i];
       }
 
-      if (s == '2019-10-13') {
+      if (s == day) {
         sampleEvents.add(sampleEvent);
       }
-      //events.add(event);
     }
 
-    print(sampleEvents.length);
     return sampleEvents;
   }
 
-  Widget getListViewDay1() {
-
+  Widget getListViewDay(day) {
+    var eventList = _getEventday(day);
     return Container(
         color: Colors.black87,
-        child: FutureBuilder(
-          future: _getEventday1(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.data == null) {
-              return Container(
-                child: Center(
-                  child: Text(
-                    "Loading....",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              );
-            } else {
-              return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return getListTile(snapshot.data[index]);
-                },
-              );
-            }
+        child: ListView.builder(
+          itemCount: eventList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return getListTile(eventList[index]);
           },
         ));
-  }
-
-  Widget getListViewDay2() {
-    return Container(
-        child: FutureBuilder(
-      future: _getEventday2(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.data == null) {
-          return Container(
-            child: Center(
-              child: Text(
-                "Loading....",
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-          );
-        } else {
-          return ListView.builder(
-            itemCount: snapshot.data.length,
-            itemBuilder: (BuildContext context, int index) {
-              return getListTile(snapshot.data[index]);
-            },
-          );
-        }
-      },
-    ));
-  }
-
-  Widget getListViewDay3() {
-
-    return Container(
-        child: FutureBuilder(
-      future: _getEventday3(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.data == null) {
-          return Container(
-            child: Center(
-              child: Text(
-                "Loading....",
-                style: TextStyle(fontSize: 30, color: Colors.black),
-              ),
-            ),
-          );
-        } else {
-          return ListView.builder(
-            itemCount: snapshot.data.length,
-            itemBuilder: (BuildContext context, int index) {
-              return getListTile(snapshot.data[index]);
-            },
-          );
-        }
-      },
-    ));
   }
 
   Widget getListTile(Sample.SampleEvent sampleEvent) {
@@ -247,20 +90,18 @@ class MyAppState extends State<MyApp> {
                     fontWeight: FontWeight.bold),
               ),
               subtitle: Text(
-                sampleEvent.description+" ("+starttime+")",
+                sampleEvent.description + " (" + starttime + ")",
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
               onTap: () {},
-              // trailing: Text(starttime,
-              //  style: TextStyle(
-              //      color: Colors.black
-              //  ),),
             ),
           ),
           children: <Widget>[
-            Detail.Info(Sample.SampleEvent(sampleEvent.name,
-                sampleEvent.start_date_time, sampleEvent.description), widget.data)
+            Detail.Info(
+                Sample.SampleEvent(sampleEvent.name,
+                    sampleEvent.start_date_time, sampleEvent.description),
+                widget.data)
           ],
         ));
 
