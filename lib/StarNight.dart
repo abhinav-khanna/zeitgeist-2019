@@ -16,7 +16,10 @@ class StarNight extends StatelessWidget {
                   child: Text(
                     'Previously on Zeitgeist Pro-Nights',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
                 ),
                 OlyyEsse(),

@@ -31,7 +31,7 @@ class MyTabsState extends State<MyTabs> with TickerProviderStateMixin, Automatic
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black87,
+        backgroundColor: Colors.black,
         flexibleSpace: TabBar(controller: controller, tabs: <Tab>[
           Tab(
             text: 'Day 1',
