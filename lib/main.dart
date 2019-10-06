@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:zeitgeist/StarNight.dart';
+import 'package:zeitgeist/notificationpage.dart';
 import './MyTabs.dart' as mytabs;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import './About.dart' as about;
 import './Team.dart' as team;
 import 'package:url_launcher/url_launcher.dart';
+import 'firebasenotifications.dart';
 
 void main() {
-  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: HomePage()));
+  runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+      routes: <String, WidgetBuilder>{
+        "/notipage": (BuildContext context) => NotificationPage(),
+      }));
 }
 
 class HomePage extends StatefulWidget {
@@ -61,6 +68,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    new FirebaseNotifications(context).setUpFirebase();
     _shedule = _buildschedule();
     _home = _shedule;
     _pronight = StarNight();
@@ -76,6 +84,17 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: Text("Zeitgeist 2019"),
           backgroundColor: Colors.black,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.notifications_active,
+                size: 30.0,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/notipage');
+              },
+            )
+          ],
         ),
         drawer: Drawer(
             child: Container(

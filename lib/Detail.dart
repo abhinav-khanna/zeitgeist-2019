@@ -137,7 +137,7 @@ class _DetailState extends State<Info> {
                     textAlign: TextAlign.center,
                   ),
             Text(
-              "Prize Details",
+              "Worth",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
