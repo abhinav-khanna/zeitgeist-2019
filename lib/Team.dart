@@ -44,7 +44,7 @@ class CoreTeam extends StatelessWidget{
                 
                 ListTile(
                   title: Text("Dilip Sharma"),
-                  subtitle: Text("WebDev Head"),
+                  subtitle: Text("WebDev & AppDev Head"),
                 ),
                 
                 ListTile(
