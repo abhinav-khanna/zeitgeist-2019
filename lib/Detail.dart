@@ -68,7 +68,8 @@ class _DetailState extends State<Info> {
             u['third_goodies'],
             u['minimum_team_size'],
             u['maximum_team_size'],
-            u['link_to_rulebook']);
+            u['link_to_rulebook'],
+            u['venue']);
         print('event finalized');
         break;
       }
@@ -136,6 +137,29 @@ class _DetailState extends State<Info> {
                     ),
                     textAlign: TextAlign.center,
                   ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "Venue: ",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  event.venue,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                )
+              ],
+            ),
             Text(
               "Worth",
               style: TextStyle(
@@ -248,8 +272,7 @@ class _DetailState extends State<Info> {
                     style: TextStyle(color: Colors.green),
                   ),
                   onPressed: () {
-                    launch(
-                        event.link_to_rulebook);
+                    launch(event.link_to_rulebook);
                   },
                 ),
               ],
