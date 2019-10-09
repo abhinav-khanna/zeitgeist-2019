@@ -39,44 +39,6 @@
         <styleUrl>#icon-1899-0288D1-highlight</styleUrl>
       </Pair>
     </StyleMap>
-    <Style id="poly-0097A7-1200-212-nodesc-normal">
-      <LineStyle>
-        <color>ffa79700</color>
-        <width>1.2</width>
-      </LineStyle>
-      <PolyStyle>
-        <color>d4a79700</color>
-        <fill>1</fill>
-        <outline>1</outline>
-      </PolyStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
-    </Style>
-    <Style id="poly-0097A7-1200-212-nodesc-highlight">
-      <LineStyle>
-        <color>ffa79700</color>
-        <width>1.8</width>
-      </LineStyle>
-      <PolyStyle>
-        <color>d4a79700</color>
-        <fill>1</fill>
-        <outline>1</outline>
-      </PolyStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
-    </Style>
-    <StyleMap id="poly-0097A7-1200-212-nodesc">
-      <Pair>
-        <key>normal</key>
-        <styleUrl>#poly-0097A7-1200-212-nodesc-normal</styleUrl>
-      </Pair>
-      <Pair>
-        <key>highlight</key>
-        <styleUrl>#poly-0097A7-1200-212-nodesc-highlight</styleUrl>
-      </Pair>
-    </StyleMap>
     <Style id="poly-097138-1-219-normal">
       <LineStyle>
         <color>ff387109</color>
@@ -107,6 +69,44 @@
       <Pair>
         <key>highlight</key>
         <styleUrl>#poly-097138-1-219-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="poly-0F9D58-1200-133-nodesc-normal">
+      <LineStyle>
+        <color>ff589d0f</color>
+        <width>1.2</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>85589d0f</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="poly-0F9D58-1200-133-nodesc-highlight">
+      <LineStyle>
+        <color>ff589d0f</color>
+        <width>1.8</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>85589d0f</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="poly-0F9D58-1200-133-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#poly-0F9D58-1200-133-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#poly-0F9D58-1200-133-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
     <Style id="poly-0F9D58-1200-194-nodesc-normal">
@@ -207,36 +207,6 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>Fastrack ARENA
-</name>
-        <styleUrl>#poly-0097A7-1200-212-nodesc</styleUrl>
-        <Polygon>
-          <outerBoundaryIs>
-            <LinearRing>
-              <tessellate>1</tessellate>
-              <coordinates>
-                76.4683635,30.9685306,0
-                76.4683555,30.9682132,0
-                76.4686935,30.9682224,0
-                76.4686827,30.9685375,0
-                76.4683635,30.9685306,0
-              </coordinates>
-            </LinearRing>
-          </outerBoundaryIs>
-        </Polygon>
-      </Placemark>
-      <Placemark>
-        <name>Fastrack
-</name>
-        <description>ARENA</description>
-        <styleUrl>#icon-1899-0288D1</styleUrl>
-        <Point>
-          <coordinates>
-            76.4685107,30.9683749,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
         <name>S. Ramanujan</name>
         <description>(Computer Science)</description>
         <styleUrl>#icon-1899-0288D1</styleUrl>
@@ -315,6 +285,34 @@
         <Point>
           <coordinates>
             76.4696508,30.9688107,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Polygon 39</name>
+        <styleUrl>#poly-0F9D58-1200-133-nodesc</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <tessellate>1</tessellate>
+              <coordinates>
+                76.4676855,30.9674325,0
+                76.4676855,30.9671841,0
+                76.4679644,30.9671749,0
+                76.4679537,30.9674325,0
+                76.4676855,30.9674325,0
+              </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>Fastrack</name>
+        <description>ARENA</description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <Point>
+          <coordinates>
+            76.4678196,30.9673175,0
           </coordinates>
         </Point>
       </Placemark>
