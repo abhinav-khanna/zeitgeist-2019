@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:zeitgeist/StarNight.dart';
 import 'package:zeitgeist/notificationpage.dart';
 import './MyTabs.dart' as mytabs;
@@ -24,9 +25,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var _home;
-  var _shedule;
-  var _pronight;
+  var _home, _shedule, _pronight;
+  static const platform = const MethodChannel('com.softcom.zeitgeist/map_view');
 
   _buildschedule() {
     return FutureBuilder(
@@ -66,6 +66,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  _openMapView() async {
+    try{
+      final int result = await platform.invokeMethod('openmapview');
+    }catch(err){
+
+    }
+  }
+
   @override
   void initState() {
     new FirebaseNotifications(context).setUpFirebase();
@@ -82,7 +90,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Zeitgeist 2019"),
+          title: Text("Zeitgeist 2k19"),
           backgroundColor: Colors.black,
           actions: <Widget>[
             IconButton(
@@ -208,8 +216,10 @@ class _HomePageState extends State<HomePage> {
                   _selectedPage = index;
                   if (index == 0)
                     _home = _shedule;
-                  else
+                  else if (index == 1)
                     _home = _pronight;
+                  else
+                    _openMapView();
                 });
               },
               items: [
@@ -221,6 +231,10 @@ class _HomePageState extends State<HomePage> {
                     icon: Icon(Icons.star),
                     title: Text('Pro-Nights'),
                     backgroundColor: Color.fromRGBO(166, 16, 30, 1)),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.map),
+                    title: Text('Map'),
+                    backgroundColor: Color.fromRGBO(166, 16, 30, 1))
               ]),
         ));
   }
