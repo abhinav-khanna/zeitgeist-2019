@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:zeitgeist/StarNight.dart';
@@ -67,11 +69,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   _openMapView() async {
-    try{
+    try {
       final int result = await platform.invokeMethod('openmapview');
-    }catch(err){
-
-    }
+    } catch (err) {}
   }
 
   @override

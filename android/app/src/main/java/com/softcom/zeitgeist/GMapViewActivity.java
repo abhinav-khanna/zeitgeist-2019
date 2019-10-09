@@ -29,7 +29,10 @@ import android.widget.ViewSwitcher;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class GMapViewActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -68,7 +71,9 @@ public class GMapViewActivity extends FragmentActivity implements OnMapReadyCall
         mMap.setMyLocationEnabled(true);
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         try {
-            KmlLayer layer = new KmlLayer(mMap, R.raw.zeitgeist, getApplicationContext());
+            String path = getApplicationInfo().dataDir + "/zeitgeist.kml";
+            FileInputStream fileInputStream = new FileInputStream(new File(path));
+            KmlLayer layer = new KmlLayer(mMap, fileInputStream, getApplicationContext());
             layer.addLayerToMap();
         } catch (XmlPullParserException e) {
             e.printStackTrace();
@@ -114,30 +119,22 @@ public class GMapViewActivity extends FragmentActivity implements OnMapReadyCall
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {// If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    // permission was granted, yay! Do the
-                    // location-related task you need to do.
-                    if (ContextCompat.checkSelfPermission(this,
-                            Manifest.permission.ACCESS_FINE_LOCATION)
-                            == PackageManager.PERMISSION_GRANTED) {
+                // permission was granted, yay! Do the
+                // location-related task you need to do.
+                if (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED) {
 
-                        mapFragment.getMapAsync(this);
-                    }
-
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-
+                    mapFragment.getMapAsync(this);
                 }
-                return;
-            }
+
+            }  // permission denied, boo! Disable the
+            // functionality that depends on this permission.
 
         }
     }
