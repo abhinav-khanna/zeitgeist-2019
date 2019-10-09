@@ -45,6 +45,8 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        resValue 'string', "gmap_api_key", keystoreProperties['gmapapikey']
     }
 
     signingConfigs {
